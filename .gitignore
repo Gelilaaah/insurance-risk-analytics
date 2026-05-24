@@ -1,6 +1,26 @@
+# Python
 __pycache__/
 *.pyc
-.env
-.venv/
-data/
-.ipynb_checkpoints/
+*.pyo
+*.pyd
+*.env
+*.venv
+env/
+venv/
+acis-env/
+# Ignore actual data files but track DVC metafiles
+data/*
+!data/*.dvc
+!data/processed/*.dvc
+
+# VSCode
+.vscode/
+
+# Jupyter
+.ipynb_checkpoints
+
+
+
+# Models / outputs
+models/
+reports/

@@ -1,524 +1,183 @@
-\# Insurance Risk Analytics \& Predictive Modeling
+# AlphaCare Insurance Analytics
 
+## Overview
+This repository contains **insurance risk analytics** using real policyholder data.  
+The goal is to analyze claims, premiums, and loss ratios to generate insights for **policy optimization**.  
 
+**Tasks included:**
+- **Task 1:** Exploratory Data Analysis (EDA)  
+- **Task 2:** Loss Ratio Analysis by Province  
 
-\## End-to-End Insurance Risk Analysis for South African Auto Insurance
+---
 
+## Dataset
+`MachineLearningRating_v3.csv` contains:
 
+| Column                 | Description                    |
+|------------------------|--------------------------------|
+| `PolicyID`             | Unique policy ID               |
+| `Gender`               | Policyholder gender            |
+| `Province`             | Province of policyholder       |
+| `TotalClaims`          | Total claims made              |
+| `TotalPremium`         | Total premium paid             |
+| `CustomValueEstimate`  | Estimated custom value         |
 
-This project focuses on building a complete analytics and predictive modeling pipeline for auto insurance risk analysis using historical insurance claim data from AlphaCare Insurance Solutions (ACIS).
+---
 
+## Task 1 – Exploratory Data Analysis (EDA)
 
+**Steps:**
+- Inspect dataset structure, missing values, basic statistics  
+- Visualize distributions: `TotalClaims`, `TotalPremium`  
+- Count plots: `Gender`, `Province`  
+- Analyze relationships & outliers: scatter plots & boxplots  
+- Compute `LossRatio` for further analysis  
 
-The objective is to analyze customer, policy, vehicle, and claims data to identify low-risk customer segments, optimize insurance pricing strategies, and support evidence-driven business decisions through statistical analysis and machine learning.
+**Example Visualizations:**  
+- Histogram of TotalClaims  
+- Histogram of TotalPremium  
+- Gender & Province counts  
+- Scatter plot: TotalPremium vs TotalClaims  
+- LossRatio boxplot by Province  
 
+---
 
+## Task 2 – Loss Ratio Analysis
 
-\---
+**Steps:**
+1. Compute loss ratio:  
 
+df['LossRatio'] = df['TotalClaims'] / df['TotalPremium']
+Aggregate by province:
 
+loss_ratio = df.groupby('Province')['LossRatio'].mean()
+loss_ratio.to_csv('../reports/loss_ratio_by_province.csv')
 
-\# Project Objectives
 
+Helps identify high-risk provinces for better decision-making.
 
+How to Run
 
-The main goals of this project are to:
+Clone the repository:
 
+git clone <your-repo-url>
+cd AlphaCare-Insurance-week-3
 
 
-\- Perform exploratory data analysis (EDA) on insurance claim data
+Create environment and install dependencies:
 
-\- Assess portfolio profitability using Loss Ratio and Margin metrics
-
-\- Identify high-risk and low-risk customer segments
-
-\- Conduct statistical hypothesis testing across demographic and geographic groups
-
-\- Build predictive models for claim probability and claim severity
-
-\- Develop reproducible data pipelines using DVC
-
-\- Create stakeholder-ready visualizations and reports
-
-\- Support risk-based pricing strategies for insurance products
-
-
-
-\---
-
-
-
-\# Business Context
-
-
-
-AlphaCare Insurance Solutions (ACIS) is preparing for expansion in the South African auto-insurance market. To remain competitive, the company aims to replace intuition-based decision making with data-driven risk analytics.
-
-
-
-Using 18 months of historical insurance data, this project investigates:
-
-
-
-\- Risk variation across provinces and customer groups
-
-\- Claim behavior trends over time
-
-\- Profitability by vehicle type and policy category
-
-\- Predictors of insurance claims and claim severity
-
-
-
-The insights generated will help ACIS improve pricing models, marketing efficiency, and customer targeting strategies.
-
-
-
-\---
-
-
-
-\# Dataset Overview
-
-
-
-The dataset contains historical insurance records from February 2014 to August 2015.
-
-
-
-\## Main Data Categories
-
-
-
-| Category | Description |
-
-|----------|-------------|
-
-| Policy | Policy identifiers and coverage information |
-
-| Transaction | Monthly transaction details |
-
-| Client | Demographic and account information |
-
-| Location | Province and postal code data |
-
-| Vehicle | Vehicle specifications and attributes |
-
-| Plan | Insurance plan and premium details |
-
-| Claims | Premium and claims information |
-
-
-
-\---
-
-
-
-\# Key Business Metrics
-
-
-
-\## Loss Ratio
-
-
-
-Loss Ratio = TotalClaims / TotalPremium
-
-
-
-A higher loss ratio indicates lower profitability.
-
-
-
-\## Margin
-
-
-
-Margin = TotalPremium - TotalClaims
-
-
-
-Measures profit contribution per policy.
-
-
-
-\---
-
-
-
-\# Project Structure
-
-
-
-insurance-risk-analytics/
-
-│
-
-├── .github/
-
-│   └── workflows/
-
-│       └── ci.yml
-
-│
-
-├── data/
-
-│
-
-├── notebooks/
-
-│   ├── 01\_eda.ipynb
-
-│   ├── 02\_hypothesis\_testing.ipynb
-
-│   └── 03\_modeling.ipynb
-
-│
-
-├── src/
-
-│   ├── \_\_init\_\_.py
-
-│   ├── data\_loader.py
-
-│   ├── eda\_utils.py
-
-│   ├── hypothesis\_tests.py
-
-│   └── modeling.py
-
-│
-
-├── reports/
-
-│   └── final\_report.md
-
-│
-
-├── tests/
-
-│
-
-├── .dvc/
-
-├── .gitignore
-
-├── dvc.yaml
-
-├── requirements.txt
-
-└── README.md
-
-
-
-\---
-
-
-
-\# Technologies Used
-
-
-
-\## Programming \& Analysis
-
-
-
-\- Python
-
-\- Pandas
-
-\- NumPy
-
-\- Matplotlib
-
-\- Seaborn
-
-\- SciPy
-
-\- Scikit-learn
-
-\- XGBoost
-
-
-
-\## Machine Learning \& Explainability
-
-
-
-\- Random Forest
-
-\- Linear Regression
-
-\- XGBoost
-
-\- SHAP
-
-\- LIME
-
-
-
-\## Development \& Reproducibility
-
-
-
-\- Git \& GitHub
-
-\- GitHub Actions
-
-\- DVC (Data Version Control)
-
-\- Jupyter Notebook
-
-
-
-\---
-
-
-
-\# Task Breakdown
-
-
-
-\## Task 1 — Exploratory Data Analysis
-
-
-
-\- Data cleaning and preprocessing
-
-\- Missing value assessment
-
-\- Descriptive statistics
-
-\- Geographic risk analysis
-
-\- Loss ratio calculations
-
-\- Visualization of claims and premiums
-
-
-
-\## Task 2 — Hypothesis Testing
-
-
-
-Statistical validation of risk differences across:
-
-
-
-\- Provinces
-
-\- Gender groups
-
-\- Vehicle types
-
-\- Postal codes
-
-
-
-Methods include:
-
-\- t-tests
-
-\- chi-square tests
-
-\- z-tests
-
-
-
-\## Task 3 — Predictive Modeling
-
-
-
-Develop models for:
-
-
-
-\- Claim probability prediction
-
-\- Claim severity estimation
-
-\- Risk-based premium optimization
-
-
-
-Models evaluated include:
-
-\- Linear Regression
-
-\- Random Forest
-
-\- XGBoost
-
-
-
-\## Task 4 — Business Insights \& Reporting
-
-
-
-\- Risk segmentation analysis
-
-\- Model interpretation using SHAP/LIME
-
-\- Business recommendations
-
-\- Pricing strategy insights
-
-
-
-\---
-
-
-
-\# How to Run the Project
-
-
-
-\## 1. Clone Repository
-
-
-
-git clone https://github.com/your-username/insurance-risk-analytics.git
-
-
-
-\## 2. Navigate to Project Directory
-
-
-
-cd insurance-risk-analytics
-
-
-
-\## 3. Create Virtual Environment
-
-
-
-\### Windows
-
-
-
-python -m venv .venv
-
-.venv\\Scripts\\activate
-
-
-
-\### Linux / Mac
-
-
-
-python -m venv .venv
-
-source .venv/bin/activate
-
-
-
-\## 4. Install Dependencies
-
-
-
+conda create -n acis-env python=3.11.9 -y
+conda activate acis-env
 pip install -r requirements.txt
 
 
-
-\## 5. Initialize DVC
-
-
-
-dvc init
-
-
-
-\## 6. Run Jupyter Notebook
-
-
+Open notebook:
 
 jupyter notebook
 
+Folder Structure
+AlphaCare-Insurance-week-3/
+│
+├─ data/processed/        # CSV files
+├─ notebooks/             # EDA & analysis notebooks
+├─ reports/               # Output CSVs
+├─ README.md              # Project overview
+├─ requirements.txt       # Dependencies
 
+# 🧪 Task 3 — Hypothesis Testing & Statistical Analysis
 
-Open:
+### 🎯 Goal
 
-notebooks/01\_eda.ipynb
+Determine statistically significant factors that influence claim probability, severity, and loss ratios.
 
+---
 
+### ✅ Implemented Steps
 
-\---
+1. Formulated hypotheses on risk factors:
 
+   * Age groups & claim frequency
+   * Vehicle type & claim severity
+   * Security features (alarm/immobilizer) & claim reduction
 
+2. Conducted statistical tests:
 
-\# Key Questions Addressed
+   * Chi-square tests for categorical variables
+   * T-tests / ANOVA for numeric features across groups
 
+3. Summarized results and effect sizes
 
+---
 
-The project aims to answer several business-critical questions:
+### 🔍 Key Findings
+* Certain age groups and citizenship categories have higher claim probabilities
+* Vehicles with alarm/immobilizer devices show significantly lower claims
+* Cresta zones show geographic variation in claims and risk
 
+---
 
+# 🤖 Task 4 — Predictive Modeling & Insights
 
-\- Which provinces generate the highest loss ratios?
+### 🎯 Goal
 
-\- Which customer segments are most profitable?
+Build models to predict the probability of claims and identify high-impact risk factors.
 
-\- Which vehicle types produce the largest claims?
+---
 
-\- Are there seasonal trends in claim frequency?
+### ✅ Models & Techniques
 
-\- Which factors best predict claim severity?
+* Logistic Regression
+* Random Forest Classifier
+* Feature importance analysis
+* Cross-validation to evaluate performance
 
-\- How can premiums be optimized using predictive analytics?
+---
 
+### 🔍 Key Insights
 
+* Age, vehicle type, and security features are top predictors
+* Loss ratios and premiums can be adjusted dynamically based on risk
+* Model outputs inform both marketing segmentation and pricing strategy
 
-\---
+---
 
+## 📈 Actionable Recommendations
 
+1. Targeted Marketing
 
-\# Deliverables
+   * Promote policies to low-risk demographics and regions
+   * Upsell security devices to mitigate risk
 
+2. Dynamic Pricing Strategy
 
+   * Adjust premiums based on predictive risk factors
+   * Incorporate vehicle features, model year, and security status
 
-The project includes:
+3. Cross-Selling Opportunities
 
+   * Offer tracking devices or alarms to high-risk segments
 
+---
 
-\- Cleaned and reproducible analytics pipeline
+## ⚠️ Limitations & Future Work
 
-\- EDA notebooks and reusable modules
+* Non-numeric columns required encoding → some nuance lost
+* External factors like economic conditions or seasonal effects not included
+* Rare events may reduce model accuracy
 
-\- Statistical hypothesis testing framework
+Future Work:
 
-\- Predictive risk models
+* Time-series analysis for seasonal trends
+* Advanced machine learning models (XGBoost, Gradient Boosting)
+* Integrate external datasets (traffic, weather, economy)
 
-\- Data versioning with DVC
+---
 
-\- Business-focused visualizations
+# 📝 Task Status
 
-\- Final stakeholder-ready report
-
-
-
-\---
-
-
-
-\# Ethical Considerations
-
-
-
-This project emphasizes responsible handling of insurance data by:
-
-
-
-\- Avoiding misuse of demographic information
-
-\- Maintaining reproducibility and auditability
-
-\- Clearly documenting assumptions and limitations
-
-\- Supporting fair and evidence-driven pricing decisions
-
-
-
-
-
+| Task                              | Status       | Description                         |
+| --------------------------------- | ------------ | ----------------------------------- |
+| Task 1.2 – EDA & Statistics   | ✔️ Completed | Full EDA + insights + plots         |
+| Task 2 – DVC & Pipeline Setup | ✔️ Completed | Reproducible data tracking          |
+| Task 3 – Hypothesis Testing   | ✔️ Completed | Statistical analysis of risk        |
+| Task 4 – Predictive Modeling  | ✔️ Completed | Claim prediction & feature 
