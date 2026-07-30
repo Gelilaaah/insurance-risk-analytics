@@ -654,3 +654,9 @@ Additional project documentation will include:
 
 **Software Engineering Student | Data & AI Enthusiast**
 
+| Task                              | Status       | Description                         |
+| --------------------------------- | ------------ | ----------------------------------- |
+| Task 1.2 – EDA & Statistics   | ✔️ Completed | Full EDA + insights + plots         |
+| Task 2 – DVC & Pipeline Setup | ✔️ Completed | Reproducible data tracking          |
+| Task 3 – Hypothesis Testing   | ✔️ Completed | Statistical analysis of risk        |
+| Task 4 – Predictive Modeling  | ✔️ Completed | Claim prediction & feature 
