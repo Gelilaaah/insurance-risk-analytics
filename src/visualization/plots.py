@@ -46,3 +46,50 @@ def plot_boxplot(
     plt.tight_layout()
 
     plt.show()
+
+def plot_count(
+    df: pd.DataFrame,
+    column: str,
+    title: str,
+    rotate_labels: bool = False,
+) -> None:
+    """
+    Plot category frequencies for a column.
+    """
+
+    plt.figure(figsize=(10, 5))
+
+    sns.countplot(
+        data=df,
+        x=column,
+    )
+
+    plt.title(title)
+
+    if rotate_labels:
+        plt.xticks(rotation=45)
+
+    plt.tight_layout()
+
+    plt.show()
+
+def plot_outliers(
+    df: pd.DataFrame,
+    column: str,
+    title: str,
+) -> None:
+    """
+    Visualize potential outliers in a numerical column.
+    """
+
+    plt.figure(figsize=(8, 4))
+
+    sns.boxplot(
+        x=df[column],
+    )
+
+    plt.title(title)
+
+    plt.tight_layout()
+
+    plt.show()
